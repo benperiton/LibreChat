@@ -14,22 +14,8 @@ services:
       - "traefik.http.routers.app-librechat.middlewares=admin-auth@file,redirect-to-https@file"
       - "traefik.http.routers.app-librechat.entrypoints=http,https"
       - "traefik.http.services.app-librechat.loadbalancer.server.port=3080"
-    depends_on:
-      - mongodb
-    image: librechat
-    build:
-      context: .
-      target: node
-    restart: always
-    user: "${UID}:${GID}"
-    extra_hosts:
-    - "host.docker.internal:host-gateway"
     env_file:
       - stack.env
-    environment:
-      - HOST=0.0.0.0
-      - MONGO_URI=mongodb://mongodb:27017/LibreChat
-      - MEILI_HOST=http://meilisearch:7700
     volumes:
       - /data/app-librechat/.env:/app/.env
       - /data/app-librechat/.env.development:/app/.env.development
@@ -41,7 +27,6 @@ services:
       - virt-srv-ingress
   mongodb:
     container_name: app-librechat-mongodb
-    image: mongo
     restart: always
     user: "${UID}:${GID}"
     volumes:
@@ -49,7 +34,6 @@ services:
     command: mongod --noauth
   meilisearch:
     container_name: app-librechat-meilisearch
-    image: getmeili/meilisearch:v1.5
     restart: always
     env_file:
       - stack.env
