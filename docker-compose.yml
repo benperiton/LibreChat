@@ -39,6 +39,7 @@ services:
         source: ./librechat.yaml
         target: /app/librechat.yaml
     networks:
+      - default
       - virt-srv-ingress
   mongodb:
     container_name: chat-mongodb
