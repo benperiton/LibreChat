@@ -47,7 +47,7 @@ services:
     restart: always
     user: "${UID}:${GID}"
     volumes:
-      - ./data-node:/data/db
+      - /data/app-librechat/data-node:/data/db
     command: mongod --noauth
   meilisearch:
     container_name: chat-meilisearch
