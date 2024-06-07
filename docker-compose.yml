@@ -38,6 +38,8 @@ services:
       - type: bind
         source: ./librechat.yaml
         target: /app/librechat.yaml
+    networks:
+      - virt-srv-ingress
   mongodb:
     container_name: chat-mongodb
     image: mongo
