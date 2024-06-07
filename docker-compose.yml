@@ -35,7 +35,9 @@ services:
       - /data/app-librechat/.env.production:/app/.env.production
       - /data/app-librechat/images:/app/client/public/images
       - /data/app-librechat/logs:/app/api/logs
-      - /data/app-librechat/librechat.yaml:/app/librechat.yaml
+      - type: bind
+        source: ./librechat.yaml
+        target: /app/librechat.yaml
   mongodb:
     container_name: chat-mongodb
     image: mongo
