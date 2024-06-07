@@ -17,7 +17,9 @@ services:
     env_file:
       - stack.env
     volumes:
-      - /data/app-librechat/.env:/app/.env
+      - type: bind
+        source: /data/app-librechat/.env
+        target: /app/.env
       - /data/app-librechat/.env.development:/app/.env.development
       - /data/app-librechat/.env.production:/app/.env.production
       - /data/app-librechat/images:/app/client/public/images
